@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        // 价格策略对象
+        var PriceStrategy = function(){
+            let strategy ={
+                return30:function(price){ //100返30
+                    return +price + parseInt(price/100)*30;
+                },
+                return50:function(price){ //100返50
+                    return +price + parseInt(price/100)*50;
+                },
+                percent90:function(price){ //9折
+                    return price*100*90/10000; // js在处理小数乘除法有bug，故运算前转化为整数
+                },
+                percent80:function(price){ //8折
+                    return price*100*80/10000; // js在处理小数乘除法有bug，故运算前转化为整数
+                },
+                percent50:function(price){ //5折
+                    return price*100*50/10000; // js在处理小数乘除法有bug，故运算前转化为整数
+                },
+            }
+            // 策略算法调用接口
+            return function(algorithm,price){
+                return strategy[algorithm] &&  strategy[algorithm](price)
+            }
+        }();
+
+        var price = PriceStrategy('return50','314.23');
+        console.log(price);
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
